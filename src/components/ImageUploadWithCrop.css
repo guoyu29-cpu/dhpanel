@@ -1,0 +1,196 @@
+/* 图片上传组件容器 */
+.image-upload-with-crop {
+  position: relative;
+  width: 100%;
+}
+
+/* 上传按钮 */
+.btn-upload-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, rgba(218, 165, 32, 0.1) 0%, rgba(218, 165, 32, 0.05) 100%);
+  border: 2px dashed rgba(218, 165, 32, 0.4);
+  border-radius: 12px;
+  color: #8b6914;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-upload-image:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(218, 165, 32, 0.15) 0%, rgba(218, 165, 32, 0.08) 100%);
+  border-color: rgba(218, 165, 32, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(218, 165, 32, 0.2);
+}
+
+.btn-upload-image:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.upload-icon {
+  font-size: 20px;
+}
+
+.upload-spinner {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 预览区域 */
+.upload-preview-area {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid rgba(218, 165, 32, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.upload-preview-area:hover {
+  border-color: rgba(218, 165, 32, 0.4);
+  box-shadow: 0 4px 15px rgba(218, 165, 32, 0.15);
+}
+
+.upload-preview-area:hover .upload-preview-overlay {
+  opacity: 1;
+}
+
+/* 预览图片 */
+.upload-preview-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.upload-preview-area:hover .upload-preview-image {
+  transform: scale(1.05);
+}
+
+/* 预览遮罩层 */
+.upload-preview-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 20px;
+}
+
+/* 操作按钮 */
+.btn-change-image,
+.btn-remove-image {
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-change-image {
+  background: linear-gradient(135deg, #daa520 0%, #8b6914 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(218, 165, 32, 0.3);
+}
+
+.btn-change-image:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(218, 165, 32, 0.4);
+  background: linear-gradient(135deg, #f0b933 0%, #9d7420 100%);
+}
+
+.btn-remove-image {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+.btn-remove-image:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(231, 76, 60, 0.4);
+  background: linear-gradient(135deg, #ff6b5b 0%, #d94437 100%);
+}
+
+.btn-change-image:disabled,
+.btn-remove-image:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* 新建项目提示 */
+.new-item-hint {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.upload-preview-area:hover .new-item-hint {
+  opacity: 1;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .btn-upload-image {
+    padding: 12px;
+    font-size: 13px;
+  }
+
+  .upload-icon {
+    font-size: 18px;
+  }
+
+  .upload-preview-overlay {
+    opacity: 0.95;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-change-image,
+  .btn-remove-image {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 20px;
+  }
+}
+
