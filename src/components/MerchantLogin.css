@@ -76,15 +76,15 @@
 
 /* 装饰性图案 */
 .login-header::after {
-  content: '◆';
+  content: '';
   position: absolute;
-  bottom: -12px;
+  bottom: -6px;
   left: 50%;
   transform: translateX(-50%);
-  color: #daa520;
-  font-size: 18px;
-  background: linear-gradient(to bottom, #fffef9 0%, #faf7f0 100%);
-  padding: 0 15px;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #daa520, transparent);
+  border-radius: 2px;
 }
 
 .login-header h1 {
@@ -161,6 +161,7 @@
 .error-alert {
   background: linear-gradient(135deg, #fff4e6 0%, #ffe4cc 100%);
   border: 2px solid #c65d00;
+  border-left: 4px solid #c65d00;
   color: #8b4000;
   padding: 16px 20px;
   border-radius: 12px;
@@ -168,7 +169,6 @@
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 10px;
   animation: shake 0.3s ease;
   box-shadow: 0 4px 15px rgba(198, 93, 0, 0.15);
 }
@@ -179,9 +179,6 @@
   75% { transform: translateX(10px); }
 }
 
-.error-icon {
-  font-size: 20px;
-}
 
 .btn-login {
   background: linear-gradient(135deg, #8b6914 0%, #daa520 50%, #ffd700 100%);
@@ -303,11 +300,14 @@
 }
 
 .login-tips li::before {
-  content: '⬥';
+  content: '';
   position: absolute;
   left: 8px;
-  color: #daa520;
-  font-weight: bold;
+  width: 6px;
+  height: 6px;
+  background: #daa520;
+  border-radius: 50%;
+  top: 14px;
 }
 
 /* 装饰圆圈 - 沙漠风格 */

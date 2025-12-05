@@ -53,11 +53,7 @@ const AttractionManagement = () => {
   const [viewingAttraction, setViewingAttraction] = useState(null);
   const [form] = Form.useForm();
   const [searchForm] = Form.useForm();
-  const [pagination, setPagination] = useState({
-    current: 1,
-    pageSize: 10,
-    total: 0
-  });
+  // 已移除分页功能
   const [statistics, setStatistics] = useState({
     total: 0
   });
@@ -101,39 +97,28 @@ const AttractionManagement = () => {
     form.setFieldsValue({ subtype: undefined });
   };
 
-  // 获取景点/项目列表
+  // 获取景点/项目列表（无分页）
   const fetchAttractions = async (params = {}) => {
     setLoading(true);
     try {
-      const searchParams = {
-        page: pagination.current,
-        limit: pagination.pageSize,
-        ...params
-      };
-
-      const response = await searchAttractions(searchParams);
+      const response = await attractionAPI.getAttractions(params);
       
       if (response.success) {
         const attractions = response.data.attractions || [];
-        const paginationData = response.data.pagination || {};
+        const total = response.data.total || attractions.length;
         
         setAttractions(attractions);
-        setPagination(prev => ({
-          ...prev,
-          total: paginationData.totalAttractions || response.data.total || attractions.length,
-          current: paginationData.currentPage || 1
-        }));
         
-        // 更新统计信息 - 使用多个数据源确保显示正确
-        const totalCount = paginationData.totalAttractions || response.data.total || attractions.length;
+        // 更新统计信息
         setStatistics({
-          total: totalCount
+          total: total
         });
+        
+        console.log(`已加载 ${attractions.length} 个景点/项目`);
       }
     } catch (error) {
       message.error('获取景点/项目列表失败');
       console.error('获取景点/项目列表失败:', error);
-      // 在错误情况下，保持统计信息为0
       setStatistics({ total: 0 });
     } finally {
       setLoading(false);
@@ -158,11 +143,10 @@ const AttractionManagement = () => {
   useEffect(() => {
     fetchAttractions();
     loadStatistics(); // 同时加载统计信息
-  }, [pagination.current, pagination.pageSize]);
+  }, []);
 
   // 搜索处理
   const handleSearch = (values) => {
-    setPagination(prev => ({ ...prev, current: 1 }));
     fetchAttractions(values);
   };
 
@@ -170,7 +154,6 @@ const AttractionManagement = () => {
   const handleReset = () => {
     searchForm.resetFields();
     setSelectedSearchType(null);
-    setPagination(prev => ({ ...prev, current: 1 }));
     fetchAttractions();
   };
 
@@ -507,16 +490,7 @@ const AttractionManagement = () => {
         dataSource={attractions}
         rowKey={(record) => record.id || record._id}
         loading={loading}
-        pagination={{
-          ...pagination,
-          showSizeChanger: true,
-          showQuickJumper: true,
-          showTotal: (total, range) =>
-            `第 ${range[0]}-${range[1]} 条，共 ${total} 条`,
-          onChange: (page, pageSize) => {
-            setPagination(prev => ({ ...prev, current: page, pageSize }));
-          }
-        }}
+        pagination={false}
         scroll={{ x: 1200 }}
       />
 

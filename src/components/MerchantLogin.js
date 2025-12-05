@@ -94,7 +94,6 @@ const MerchantLogin = ({ onLoginSuccess }) => {
 
           {error && (
             <div className="error-alert">
-              <span className="error-icon">⚠️</span>
               {error}
             </div>
           )}

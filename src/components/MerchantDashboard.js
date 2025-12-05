@@ -253,7 +253,6 @@ const MerchantDashboard = () => {
               className={`nav-item ${activeTab === 'basic' ? 'active' : ''}`}
               onClick={() => setActiveTab('basic')}
             >
-              <span className="nav-icon">🏪</span>
               基本信息
             </button>
             
@@ -262,7 +261,6 @@ const MerchantDashboard = () => {
                 className={`nav-item ${activeTab === 'dishes' ? 'active' : ''}`}
                 onClick={() => setActiveTab('dishes')}
               >
-                <span className="nav-icon">🍽️</span>
                 菜品管理
               </button>
             )}
@@ -272,7 +270,6 @@ const MerchantDashboard = () => {
                 className={`nav-item ${activeTab === 'rooms' ? 'active' : ''}`}
                 onClick={() => setActiveTab('rooms')}
               >
-                <span className="nav-icon">🛏️</span>
                 房型管理
               </button>
             )}
@@ -282,7 +279,6 @@ const MerchantDashboard = () => {
                 className={`nav-item ${activeTab === 'services' ? 'active' : ''}`}
                 onClick={() => setActiveTab('services')}
               >
-                <span className="nav-icon">🎯</span>
                 服务管理
               </button>
             )}
@@ -292,8 +288,8 @@ const MerchantDashboard = () => {
             <h4>商家类别</h4>
             <p>{merchantInfo.category}</p>
             <h4>联系方式</h4>
-            <p>📞 {merchantInfo.phone}</p>
-            {merchantInfo.wechat && <p>💬 {merchantInfo.wechat}</p>}
+            <p>电话：{merchantInfo.phone}</p>
+            {merchantInfo.wechat && <p>微信：{merchantInfo.wechat}</p>}
           </div>
         </aside>
 

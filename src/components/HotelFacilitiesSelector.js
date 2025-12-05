@@ -304,8 +304,9 @@ const HotelFacilitiesSelector = ({ value = [], onChange }) => {
                             <button
                               type="button"
                               onClick={() => addCustomSubtype(categoryName, facilityName)}
+                              className="btn-confirm-small"
                             >
-                              ✓
+                              确认
                             </button>
                             <button
                               type="button"
@@ -316,8 +317,9 @@ const HotelFacilitiesSelector = ({ value = [], onChange }) => {
                                 }));
                                 setCustomSubtypeValue('');
                               }}
+                              className="btn-cancel-small"
                             >
-                              ✕
+                              取消
                             </button>
                           </div>
                         )}

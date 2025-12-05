@@ -212,3 +212,4 @@ function createImage(url) {
 
 export default ImageCropModal;
 
+

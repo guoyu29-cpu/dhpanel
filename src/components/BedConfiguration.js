@@ -11,11 +11,11 @@ const BedConfiguration = ({ value = [], onChange }) => {
   });
 
   const bedTypes = [
-    { value: 'single', label: '单人床', icon: '🛏️' },
-    { value: 'double', label: '双人大床', icon: '🛌' },
-    { value: 'sofa', label: '沙发床', icon: '🛋️' },
-    { value: 'bunk', label: '上下铺', icon: '🪜' },
-    { value: 'tatami', label: '榻榻米', icon: '🏯' }
+    { value: 'single', label: '单人床' },
+    { value: 'double', label: '双人大床' },
+    { value: 'sofa', label: '沙发床' },
+    { value: 'bunk', label: '上下铺' },
+    { value: 'tatami', label: '榻榻米' }
   ];
 
   // 初始化床位数据
@@ -82,9 +82,9 @@ const BedConfiguration = ({ value = [], onChange }) => {
     return beds.reduce((total, bed) => total + bed.count, 0);
   };
 
-  // 获取床型图标
-  const getBedIcon = (type) => {
-    return bedTypes.find(bt => bt.value === type)?.icon || '🛏️';
+  // 获取床型标签
+  const getBedLabel = (type) => {
+    return bedTypes.find(bt => bt.value === type)?.label || '床位';
   };
 
   return (
@@ -113,7 +113,6 @@ const BedConfiguration = ({ value = [], onChange }) => {
           {beds.map(bed => (
             <div key={bed.id} className="bed-item">
               <div className="bed-info">
-                <span className="bed-icon">{getBedIcon(bed.type)}</span>
                 <div className="bed-details">
                   <span className="bed-label">{bed.label}</span>
                   <span className="bed-specs">{bed.width}m宽</span>
@@ -171,7 +170,6 @@ const BedConfiguration = ({ value = [], onChange }) => {
                     onChange={(e) => setNewBed({ ...newBed, type: e.target.value })}
                   />
                   <span className="bed-type-content">
-                    <span className="bed-type-icon">{bedType.icon}</span>
                     <span className="bed-type-label">{bedType.label}</span>
                   </span>
                 </label>
@@ -246,3 +244,4 @@ const BedConfiguration = ({ value = [], onChange }) => {
 };
 
 export default BedConfiguration;
+

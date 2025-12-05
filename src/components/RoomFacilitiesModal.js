@@ -179,3 +179,4 @@ const RoomFacilitiesModal = ({
 };
 
 export default RoomFacilitiesModal;
+

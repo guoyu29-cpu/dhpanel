@@ -393,11 +393,18 @@ export const uploadAPI = {
 
   // 上传行程图片
   uploadItineraryImage: (file) => {
+    console.log('uploadAPI.uploadItineraryImage 被调用');
     const formData = new FormData();
     formData.append('image', file);
+    console.log('FormData 创建完成，准备发送请求到:', '/upload/itinerary/image');
     return api.post('/upload/itinerary/image', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
+      },
+      timeout: 30000, // 增加到30秒超时
+      onUploadProgress: (progressEvent) => {
+        const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+        console.log(`上传进度: ${percentCompleted}%`);
       }
     });
   },

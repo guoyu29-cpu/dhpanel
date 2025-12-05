@@ -120,10 +120,10 @@ const MerchantRegister = () => {
     return (
       <div className="merchant-register-container">
         <div className="success-message">
-        <div className="success-icon">✓</div>
-        <h2>注册成功！</h2>
-        <p>您的商家账户已创建成功，正在跳转到登录页面...</p>
-        <p className="status-note">您的账户已激活，可以立即使用所有功能</p>
+          <div className="success-icon">✓</div>
+          <h2>注册成功！</h2>
+          <p>您的商家账户已创建成功，正在跳转到登录页面...</p>
+          <p className="status-note">您的账户已激活，可以立即使用所有功能</p>
         </div>
       </div>
     );

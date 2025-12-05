@@ -180,14 +180,11 @@ const ImageUploadWithCrop = ({
         >
           {uploading ? (
             <>
-              <span className="upload-spinner">⏳</span>
+              <span className="upload-spinner"></span>
               <span>上传中...</span>
             </>
           ) : (
-            <>
-              <span className="upload-icon">📷</span>
-              <span>{buttonText}</span>
-            </>
+            <span>{buttonText}</span>
           )}
         </button>
       )}

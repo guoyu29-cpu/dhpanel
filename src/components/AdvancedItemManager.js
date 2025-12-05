@@ -395,21 +395,21 @@ const AdvancedItemManager = ({
                   onClick={() => setEditingIndex(editingIndex === index ? -1 : index)}
                   title="编辑"
                 >
-                  ✏️
+                  编辑
                 </button>
                 <button
                   className="action-btn duplicate"
                   onClick={() => duplicateItem(index)}
                   title="复制"
                 >
-                  📋
+                  复制
                 </button>
                 <button
                   className="action-btn delete"
                   onClick={() => removeItem(index)}
                   title="删除"
                 >
-                  🗑️
+                  删除
                 </button>
               </div>
             </div>

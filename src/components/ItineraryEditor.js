@@ -727,12 +727,13 @@ const ItineraryEditor = () => {
   const fetchAttractions = async () => {
     setLoading(true);
     try {
-      const response = await attractionAPI.getAttractions({ limit: 50 });
+      const response = await attractionAPI.getAttractions();
       console.log('Attractions API response:', response);
       if (response?.success) {
-        // 后端返回的数据结构是 { success: true, data: { attractions: [...], pagination: {...} } }
+        // 后端返回的数据结构是 { success: true, data: { attractions: [...], total: number } }
         const attractionsData = response.data?.attractions || response.data || [];
         setAttractions(Array.isArray(attractionsData) ? attractionsData : []);
+        console.log(`已加载 ${attractionsData.length} 个景点`);
       } else {
         console.warn('API response success is false or missing');
         setAttractions([]);
@@ -1088,10 +1089,12 @@ const ItineraryEditor = () => {
       // 获取上传后的URL
       const response = info.file.response;
       if (response?.success && response?.data?.url) {
-        const fullUrl = `https://dhapp.rgm.games${response.data.url}`;
+        const fullUrl = `http://localhost:3001${response.data.url}`;
         setImageUrl(fullUrl);
         form.setFieldsValue({ image: fullUrl });
         message.success('图片上传成功！');
+      } else {
+        message.error('图片上传失败：响应格式错误');
       }
       setUploading(false);
     } else if (info.file.status === 'error') {
@@ -1102,12 +1105,43 @@ const ItineraryEditor = () => {
 
   // 自定义上传请求
   const customUploadRequest = async ({ file, onSuccess, onError }) => {
+    console.log('=== 开始上传图片 ===');
+    console.log('文件信息:', {
+      name: file.name,
+      size: file.size,
+      type: file.type
+    });
+    
     try {
+      setUploading(true);
+      console.log('调用 uploadAPI.uploadItineraryImage...');
+      
       const response = await uploadAPI.uploadItineraryImage(file);
-      onSuccess(response, file);
+      
+      console.log('上传响应:', response);
+      
+      if (response?.success && response?.data?.url) {
+        // 使用本地后端服务器地址
+        const fullUrl = `http://localhost:3001${response.data.url}`;
+        console.log('完整URL:', fullUrl);
+        setImageUrl(fullUrl);
+        form.setFieldsValue({ image: fullUrl });
+        message.success('图片上传成功！');
+        onSuccess(response, file);
+      } else {
+        console.error('响应格式错误:', response);
+        throw new Error('上传响应格式错误');
+      }
     } catch (error) {
-      onError(error);
+      console.error('=== 上传错误 ===');
+      console.error('错误类型:', error.name);
+      console.error('错误信息:', error.message);
+      console.error('完整错误:', error);
       message.error('上传失败：' + (error.message || '未知错误'));
+      onError(error);
+    } finally {
+      console.log('=== 上传结束 ===');
+      setUploading(false);
     }
   };
 
@@ -1207,25 +1241,27 @@ const ItineraryEditor = () => {
             </Col>
             <Col span={6}>
               <Form.Item name="image" label="行程封面图">
-                <Upload
-                  name="image"
-                  listType="picture-card"
-                  showUploadList={false}
-                  customRequest={customUploadRequest}
-                  beforeUpload={beforeUpload}
-                  onChange={handleImageUpload}
-                  style={{ width: '100%' }}
-                >
-                  {imageUrl ? (
-                    <img src={imageUrl} alt="行程封面" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  ) : (
-                    <div>
-                      <PlusOutlined />
-                      <div style={{ marginTop: 8, fontSize: '12px' }}>上传封面</div>
-                    </div>
-                  )}
-                </Upload>
-                {uploading && <div style={{ fontSize: '12px', color: '#1890ff', marginTop: 4 }}>上传中...</div>}
+                <div>
+                  <Upload
+                    name="image"
+                    listType="picture-card"
+                    showUploadList={false}
+                    customRequest={customUploadRequest}
+                    beforeUpload={beforeUpload}
+                    onChange={handleImageUpload}
+                    style={{ width: '100%' }}
+                  >
+                    {imageUrl ? (
+                      <img src={imageUrl} alt="行程封面" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    ) : (
+                      <div>
+                        <PlusOutlined />
+                        <div style={{ marginTop: 8, fontSize: '12px' }}>上传封面</div>
+                      </div>
+                    )}
+                  </Upload>
+                  {uploading && <div style={{ fontSize: '12px', color: '#1890ff', marginTop: 4 }}>上传中...</div>}
+                </div>
               </Form.Item>
             </Col>
           </Row>

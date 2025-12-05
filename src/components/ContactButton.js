@@ -7,7 +7,6 @@ const ContactButton = () => {
   return (
     <>
       <button className="contact-float-btn" onClick={() => setShowModal(true)}>
-        <span className="contact-icon">📞</span>
         <span className="contact-text">联系我们</span>
       </button>
 
@@ -23,7 +22,6 @@ const ContactButton = () => {
             
             <div className="contact-modal-body">
               <div className="contact-section">
-                <div className="contact-icon-large">🏢</div>
                 <h4>敦煌文旅平台</h4>
                 <p className="platform-desc">为您提供专业的商家服务支持</p>
               </div>
@@ -32,7 +30,6 @@ const ContactButton = () => {
 
               <div className="contact-info-grid">
                 <div className="contact-item">
-                  <div className="contact-item-icon">📱</div>
                   <div className="contact-item-content">
                     <div className="contact-label">联系电话</div>
                     <div className="contact-value">13989648964</div>
@@ -41,16 +38,14 @@ const ContactButton = () => {
                 </div>
 
                 <div className="contact-item">
-                  <div className="contact-item-icon">💬</div>
                   <div className="contact-item-content">
-                    <div className="contact-label">微信客服</div>
+                    <div className="contact-label">联系微信</div>
                     <div className="contact-value">1234567890</div>
                     <div className="contact-note">扫码或搜索添加</div>
                   </div>
                 </div>
 
                 <div className="contact-item">
-                  <div className="contact-item-icon">📧</div>
                   <div className="contact-item-content">
                     <div className="contact-label">商务邮箱</div>
                     <div className="contact-value">XXXXXX@dhtravel.com</div>
@@ -59,7 +54,6 @@ const ContactButton = () => {
                 </div>
 
                 <div className="contact-item">
-                  <div className="contact-item-icon">📍</div>
                   <div className="contact-item-content">
                     <div className="contact-label">办公地址</div>
                     <div className="contact-value">北京市东城区</div>
@@ -72,7 +66,6 @@ const ContactButton = () => {
 
               <div className="office-hours-section">
                 <div className="office-hours-header">
-                  <div className="office-hours-icon">⏰</div>
                   <h4>办公时间</h4>
                 </div>
                 <div className="office-hours-grid">
@@ -86,8 +79,7 @@ const ContactButton = () => {
                   </div>
                 </div>
                 <div className="office-note">
-                  <span className="note-icon">ℹ️</span>
-                  <span>法定节假日休息，紧急事务请电话咨询</span>
+                  <span>注意：法定节假日休息，紧急事务请电话咨询</span>
                 </div>
               </div>
             </div>
@@ -105,4 +97,5 @@ const ContactButton = () => {
 };
 
 export default ContactButton;
+
 

@@ -83,8 +83,10 @@
 .item-info {
   flex: 1;
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 15px;
+  flex-wrap: nowrap;
 }
 
 .item-info h4 {
@@ -92,15 +94,18 @@
   font-size: 16px;
   color: #5d4e37;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .item-price {
   background: linear-gradient(135deg, #8b6914 0%, #daa520 100%);
-  color: white;
+  color: #ffffff !important;
   padding: 4px 12px;
   border-radius: 12px;
   font-size: 14px;
   font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .item-actions {
@@ -109,16 +114,18 @@
 }
 
 .action-btn {
-  width: 32px;
+  min-width: 60px;
   height: 32px;
+  padding: 0 12px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 13px;
   transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
 .action-btn.edit {
